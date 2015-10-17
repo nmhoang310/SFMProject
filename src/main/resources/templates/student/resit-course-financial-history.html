@@ -1,0 +1,130 @@
+<!--Main Content-->
+<div class="content-wrapper bg-white" style="min-height: 916px;">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="text-center">Danh Sách Đóng Tiền Các Môn Học Lại</h2>
+
+                <div class="box box-borderless">
+                    <table class="table table-hover table-bordered table-text-center">
+                        <tbody>
+                        <tr>
+                            <th style="width: 10px">STT</th>
+                            <th>Mã Môn</th>
+                            <th>Tên Môn</th>
+                            <th>Tình Trạng</th>
+                            <th>Ngày Chuyển Khoản</th>
+                            <th>Xem Chi Tiết</th>
+                        </tr>
+
+                        <tr th:if="${listResitCourse.size() == 0}">
+                            <td colspan="6" class="text-center"><b>ĐANG CẬP NHẬT</b>
+                            </td>
+                        </tr>
+
+                        <th:block th:each="item, i : ${listResitCourse}">
+
+                            <tr th:with="sub=${item.studentCourse.course.subject}" data-toggle="collapse"  th:attr="data-target='#row'+${i.count}" class="accordion-toggle">
+                                <td th:text="${i.count}">1.</td>
+                                <td th:text="${sub.subjectCode}">PRJ</td>
+                                <td th:text="${sub.englishName}">Advance Java</td>
+                                <td th:if="${item.status}">Đã Nộp</td>
+                                <td th:if="${!item.status}">Chưa Nộp</td>
+                                <td th:if="${item.transferDate != null}"
+                                    th:text="${#dates.format(item.transferDate, 'dd-MM-yyyy')}">
+                                    09/07/2015
+                                </td>
+                                <td th:if="${item.transferDate == null}"
+                                    th:text="'-'"></td>
+                                <td>
+                                    <button class="btn btn-default btn-xs"><span
+                                            class="glyphicon glyphicon-eye-open"></span></button>
+                                </td>
+                            </tr>
+                            <tr th:with="student=${item.student},course=${item.studentCourse.course}, season=${item.studentCourse.semester.season}">
+                                <td colspan="6" class="collapse-row">
+                                    <div class="my-row accordian-body collapse"  th:id="'row' + ${i.count}">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <table class="table borderless collapse-table">
+                                                <tbody>
+                                                <tr>
+                                                    <td width="30%"><label>Họ Và Tên</label></td>
+                                                    <td th:text="${student.fullName}">Trần Khắc Vỹ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label>MSSV</label></td>
+                                                    <td th:text="${student.studentCode}">SE60964</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label>CMND</label></td>
+                                                    <td th:text="${student.ssn}">241999000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label>Nội Dung Đóng Tiền</label></td>
+                                                    <td th:text="'Nợ Môn : ' + ${course.subject.englishName}">Nợ Môn PRJ - Advance Java</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label>Học Kỳ</label></td>
+                                                    <td th:text="${season.seasonName} + ' ( ' + ${#dates.format(season.startDate, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(season.endDate, 'dd-MM-yyyy')} + ' ) '">Fall 2015 (03/05/2015 -
+                                                        03/08/2015)
+                                                    </td>
+                                                </tr>
+
+
+                                               <!-- <tr>
+                                                    <td><label>Mức Học Phí</label></td>
+                                                    <td th:text="${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(item.totalTuition)} + ' VNĐ'">24,000,000 VNĐ</td>
+                                                </tr>-->
+                                                <tr>
+                                                    <td><label>Học Phí Cần Nộp</label></td>
+                                                    <td th:text="${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(item.totalTuition)} + ' VNĐ'">12,000,000 VNĐ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label>Học Phí Đã Nộp</label></td>
+                                                    <td th:text="${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(item.paidAmount)} + ' VNĐ'">12,000,000 VNĐ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label>Trạng Thái</label></td>
+                                                    <td th:text="${item.status} ? 'Đã Nộp' : 'Nộp Thiếu'">Nộp Đủ</td>
+                                                </tr>
+                                              <!--  <tr>
+                                                    <td><label>Thiếu/Dư</label></td>
+                                                    <td>0 VNĐ</td>
+                                                </tr>-->
+                                                <tr>
+                                                    <td ><label>Ngày Chuyển
+                                                        Khoản</label></td>
+                                                    <td th:if="${item.transferDate != null}"
+                                                        th:text="${#dates.format(item.transferDate, 'dd-MM-yyyy')}">
+                                                        09/07/2015
+                                                    </td>
+                                                    <td th:if="${item.transferDate == null}" th:text="'-'"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label>Ngân Hàng</label>
+                                                    </td>
+                                                    <td> - </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>

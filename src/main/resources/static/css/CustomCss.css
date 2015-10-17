@@ -1,0 +1,103 @@
+/*home.html*/
+
+/*Model StudentModel Profile*/
+.borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+    border: none;
+}
+
+/*StudentModel : cac ky da hoc*/
+.filter-term{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/*StudentModel - Trang Thai Dong Hoc Phi*/
+.collapse-row{
+    padding: 0px !important;
+}
+.collapse-row, .collapse-row td{
+    background-color: #f5f5f5;
+}
+.collapse-table tbody tr td{
+    text-align: left;
+}
+
+
+.modal .modal-nor {
+    width: 50%; /* respsonsive width */
+    margin-left: 25%; /* width/2) */
+}
+
+/*StudentModel Module*/
+.bg-white {
+    background-color: white;
+}
+.my-row{
+    margin-top: 20px;
+}
+
+.box-borderless {
+    border: none;
+}
+
+.table-text-center tbody td, .table-text-center tbody th,
+.table-text-center thead tr th,
+.table-text-center tfoot tr th {
+    text-align: center;
+}
+
+.my-border{
+    border-width: 1px 1px 2px;
+    border-style: solid;
+    border-top: none;
+    border-right-color: #ccc!important;
+    border-bottom-color: #ccc!important;
+    border-left-color: #ccc!important;
+}
+
+.my-box {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/*Upload file*/
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+
+

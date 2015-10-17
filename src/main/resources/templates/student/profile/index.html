@@ -1,0 +1,43 @@
+<div class="content-wrapper bg-white" style="min-height: 916px;"
+     xmlns:th="http://www.thymeleaf.org/">
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <ul class="nav nav-pills nav-justified bg-aqua">
+                    <li class="active"><a data-toggle="pill" href="#home">Thông
+                        Tin Cá Nhân</a></li>
+                    <li><a data-toggle="pill" href="#menu1">Cập Nhật Thông Tin
+                        Cá Nhân</a></li>
+                    <li><a data-toggle="pill" href="#menu2">Đổi Mật Khẩu</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content my-border">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1"  th:include="student/profile/parts/view-profile">
+                                <!-- Display student profile -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2" th:include="student/profile/parts/update-profile">
+                                <!-- Display form to update student profile -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2" th:include="student/profile/parts/update-password">
+                                <!-- Display form to update password -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

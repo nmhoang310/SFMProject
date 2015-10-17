@@ -1,0 +1,161 @@
+<div class="content-wrapper bg-white" style="min-height: 916px;">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row" >
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="text-center" th:if="${currentSemester==null}">Chưa Nhập Học</h2>
+                <th:block th:if="${currentSemester!=null}">
+                    <h2 class="text-center">Những Kỳ Đã Học</h2>
+                    <!--<div class="box box-borderless">-->
+                    <!--<div class="col-md-12">-->
+                    <div class="my-box">
+                        <div class="col-md-8 col-xs-8">
+                            <h3 th:text="${currentSemester.term.termName}">Fall
+                                2015</h3>
+
+                            <p th:text="'Từ ' + ${#dates.format(currentSemester.term.startDate, 'dd-MM-yyyy')} + ' đến ' + ${#dates.format(currentSemester.term.endDate, 'dd-MM-yyyy')}">
+                                From : 07/09/2015 - 16/01/2016</p>
+                        </div>
+
+                        <div class="col-md-4 col-xs-4">
+                            <div class="dropdown pull-right">
+                                <button class="btn btn-primary dropdown-toggle filter-academicYear"
+                                        type="button" data-toggle="dropdown">
+                                <span th:text="${currentSemester.studyStage.stageCode}"
+                                      th:remove="tag"></span>
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a th:href="@{'/sinh-vien/cac-ky-da-hoc?maso=' + ${item.semesterId}}"
+                                           th:each="item: ${listStudentSemester}"
+                                           th:text="${item.studyStage.stageCode}">Học
+                                            Ky 2</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--</div>-->
+
+                    <div class="col-md-12">
+                        <table class="table table-hover table-bordered table-responsive table-text-center">
+                            <tbody>
+                            <tr>
+                                <th style="width: 10px">STT</th>
+                                <th>Mã Môn</th>
+                                <th>Tên Môn</th>
+                                <th>Số Tín Chỉ</th>
+                                <th>Half</th>
+                                <th>Điểm Trung Bình</th>
+                                <th>Trạng Thái</th>
+                                <th>Ghi Chú</th>
+                            </tr>
+
+                            <tr th:if="${listCourse.size() == 0}">
+                                <td colspan="8" class="text-center"><b>Updating</b>
+                                </td>
+                            </tr>
+
+                            <tr th:each="item, i : ${listCourse}" th:with="sub=${item.subjectInSemester.subject}">
+                                <td th:text="${i.count}">1.</td>
+                                <td th:text="${sub.subjectCode}">
+                                    PRJ
+                                </td>
+                                <td th:text="${sub.subjectNameE}">
+                                    Advance Java
+                                </td>
+                                <td th:text="${item.subjectInSemester.numberOfCredit}">3
+                                </td>
+                                <td th:text="${item.subjectInSemester.half}">1</td>
+                                <td th:if="${item.mark lt 0}">-</td>
+                                <th:block th:if="${item.mark lt 0}">
+                                    <td>-</td>
+                                </th:block>
+                                <th:block th:if="${item.mark gt 0}">
+                                    <td th:text="${item.mark}"></td>
+                                    <td th:text="${item.isPass} ? 'Đạt' : 'Rớt'"></td>
+                                </th:block>
+
+                                <td th:text="${item.isRetake} ? 'Học Lại' : ${note}"></td>
+                            </tr>
+
+                            <!--
+                            <tr>
+                                <td>1.</td>
+                                <td>
+                                    PRJ
+                                </td>
+                                <td>Advance Java</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>7.5</td>
+                                <td>Passed</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>1.</td>
+                                <td>
+                                    PRJ
+                                </td>
+                                <td>Advance Java</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>7.5</td>
+                                <td>Passed</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>1.</td>
+                                <td>
+                                    PRJ
+                                </td>
+                                <td>Advance Java</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>7.5</td>
+                                <td>Failed</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>1.</td>
+                                <td>
+                                    PRJ
+                                </td>
+                                <td>Advance Java</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>7.5</td>
+                                <td>Failed</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>1.</td>
+                                <td>
+                                    DB
+                                </td>
+                                <td>Introduction To Database</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>8</td>
+                                <td>Pass</td>
+                                <td>Học Lại</td>
+                            </tr>
+    -->
+                            </tbody>
+                        </table>
+                    </div>
+                </th:block>
+
+
+                <!--</div>-->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>

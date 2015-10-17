@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/css/font-awesome/css/font-awesome.min.css}"/>
+    <!-- <link rel="stylesheet"
+           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>-->
+    <link rel="stylesheet" th:href="@{/css/AdminLTE.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/skins/skin-blue.css}"
+          type="text/css"/>
+</head>
+<body>
+<div class="login-box">
+    <div class="login-logo">
+        <img src="/img/logo/logoFPT.PNG"/>
+    </div>
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your term</p>
+
+        <form th:action="@{/login}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+            <!--error-->
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+
+            <div class="form-group has-feedback">
+                <input type="text" name="username" class="form-control"
+                       value="student" placeholder="abc@fpt.edu.vn"/>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="password" class="form-control"
+                       value="123456" placeholder="Password"/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit"
+                            class="btn btn-primary btn-block btn-flat">Login
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="social-auth-links text-center">
+        </div>
+        <a href="#">I forgot my password</a><br/>
+    </div>
+</div>
+</body>
+</html>

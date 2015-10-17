@@ -1,0 +1,309 @@
+<div class="content-wrapper bg-white" style="min-height: 916px;"
+     xmlns:th="http://www.thymeleaf.org/">
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <ul class="nav nav-pills nav-justified bg-aqua">
+                    <li class="active"><a data-toggle="pill" href="#home">Thông
+                        Tin Cá Nhân</a></li>
+                    <li><a data-toggle="pill" href="#menu1">Cập Nhật Thông Tin
+                        Cá Nhân</a></li>
+                    <li><a data-toggle="pill" href="#menu2">Đổi Mật Khẩu</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content my-border">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="row">
+                            <h3 class="text-center">Thông Tin Cá
+                                Nhân</h3>
+
+                            <div class="col-md-10 col-md-offset-1">
+                                <table class="table borderless" th:if="${student != null}">
+                                    <tbody>
+                                    <tr>
+                                        <td width="30%"><label>Họ Và Tên</label></td>
+                                        <td th:text="${student.fullName}">Trần Khắc Vỹ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Giới Tính</label></td>
+                                        <td th:if="${student.gender}">Nam</td>
+                                        <td th:if="${!student.gender}">Nữ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>MSSV</label></td>
+                                        <td th:text="${student.studentCode}">SE60964</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Email</label></td>
+                                        <td th:text="${student.email}">VyTKSE60964@fpt.edu.vn</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Ngày Sinh</label></td>
+                                        <!--<td th:text="${student.dateOfBirth}">07/06/2015</td>-->
+                                        <td th:text="${#dates.format(student.dateOfBirth, 'dd-MM-yyyy')}">07/06/2015</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Số Điện Thoại</label></td>
+                                        <td th:text="${student.phoneNumber}">01672011550</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Địa Chỉ</label></td>
+                                        <td th:text="${student.address}">123 Lê Lọi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Email Phụ Huynh</label></td>
+                                        <td th:text="${student.parentEmail}">phuhuynh@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Số Điện Thoại Phụ Huynh</label></td>
+                                        <td th:text="${student.parentPhone}">0123456789</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Tình Trạng</label></td>
+
+                                        <th:block th:switch="${student.financialType.financialTypeName}">
+                                            <td th:case="'HB'" th:text="'Sinh Viên Học Bổng: ' + ${student.financialType.financialRate} + '%'">Sinh Viên Học Bổng</td>
+                                            <td th:case="'BT'">Sinh Viên Thường</td>
+                                            <td th:case="'TD'" th:text="'Sinh Viên Tín Dụng: ' + ${student.financialType.financialRate} + '%'">Sinh Viên Tín Dụng</td>
+                                            <td th:case="'DT'" th:text="'Sinh Viên Được Đầu Tư: ' + ${student.financialType.financialRate} + '%' ">Sinh Viên Được Đầu Tư</td>
+                                        </th:block>
+
+                                    </tr>
+                                    <tr>
+                                        <td><label>Khóa Nhập Học</label></td>
+                                        <td th:text="${student.term}">Khóa 7</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Học Kỳ Nhập Học</label></td>
+                                        <td>Fall 2011 (06/07/2011 - 07/11/2011)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Tiếng Anh Đầu Vào</label></td>
+                                        <td>ENG4</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class="text-center">Cập Nhật Thông Tin Cá
+                                    Nhân</h3>
+
+                                <div class="box box-borderless">
+                                    <div class="box-body box-profile">
+                                        <h4 class="profile-username text-center">
+                                            Trần Khắc Vỹ</h4>
+
+                                        <p class="text-muted text-center">Sinh
+                                            Viên</p>
+
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="inputPhone"
+                                                       class="col-sm-4 control-label">Số
+                                                    Điện Thoại*</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputPhone"
+                                                           placeholder="Nhập Số Điện Thoại"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress"
+                                                       class="col-sm-4 control-label">Địa
+                                                    Chỉ*</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputAddress"
+                                                           placeholder="Nhập Địa Chỉ"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputParentPhone"
+                                                       class="col-sm-4 control-label">Số
+                                                    Điện Thoại Phụ
+                                                    Huynh*</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputParentPhone"
+                                                           placeholder="Nhập Số Điện Thoại Phụ Huynh"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputParentEmail"
+                                                       class="col-sm-4 control-label">Email
+                                                    Phụ Huynh*</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputParentEmail"
+                                                           placeholder="Nhập Email Phụ Huynh"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-5 col-sm-2">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">
+                                                        Cập Nhật
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class="text-center">Đổi Mật Khẩu</h3>
+
+                                <div class="box box-borderless">
+                                    <div class="box-body box-profile">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="inputCurPassword"
+                                                       class="col-sm-4 control-label">Mật
+                                                    Khẩu Hiện Tại*</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputCurPassword"
+                                                           placeholder="Mật Khẩu Hiện Tại"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputNewPassword"
+                                                       class="col-sm-4 control-label">Mật
+                                                    Khẩu Mới*</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputNewPassword"
+                                                           placeholder="Mật Khẩu Mới"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputConfirmNewPassword"
+                                                       class="col-sm-4 control-label">Nhập
+                                                    Lại Mật Khẩu Mới*</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputConfirmNewPassword"
+                                                           placeholder="Nhập Lại Mật Khẩu Mới"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-5 col-sm-2">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">
+                                                        Cập Nhật
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--
+                <h2 class="text-center">Thông Tin Sinh Viên</h2>
+                <div class="box box-borderless">
+                    <table class="table borderless">
+                        <thead>
+                        <tr>
+                            <td style="width: 15%"></td>
+                            <td style="width: 15%"></td>
+                            <td style="width: 20%"></td>
+                            <td style="width: 15%"></td>
+                            <td style="width: 15%"></td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><b>Họ Và Tên</b></td>
+                            <td colspan="2">Trần Khắc Vỹ</td>
+                            <td><b>Giới Tính</b></td>
+                            <td colspan="2">Nam</td>
+                        </tr>
+                        <tr>
+                            <td><b>MSSV</b></td>
+                            <td colspan="2">SE60964</td>
+                            <td><b>CMND</b></td>
+                            <td colspan="2">241488591</td>
+                        </tr>
+                        <tr>
+                            <td><b>Ngày Sinh</b></td>
+                            <td colspan="2">07/06/1993</td>
+                            <td><b>Điện Thoại</b></td>
+                            <td colspan="2">01672011550</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Email</b></td>
+                            <td colspan="4">VyTKSE60964@fpt.edu.vn</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Email Phụ Huynh</b></td>
+                            <td colspan="4">phuhuynh@gmail.com
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Số Điện Thoại Phụ Huynh</b></td>
+                            <td colspan="4">01672011550</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Tình Trạng</b></td>
+                            <td colspan="4">Tín Dụng 50%</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Khóa Nhập Học</b></td>
+                            <td colspan="4">Khóa 7</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Tiếng Anh Đầu Và</b></td>
+                            <td colspan="4">ENG4</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Học Kỳ</b></td>
+                            <td colspan="4">Fall 2011( 12/6/2011 - 12/9/2011)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                -->
+
+
+            </div>
+        </div>
+    </section>
+</div>

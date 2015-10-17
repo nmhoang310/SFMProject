@@ -1,0 +1,55 @@
+<div class="content-wrapper bg-white" style="min-height: 916px;">
+    <!-- Main content -->
+    <section class="content">
+        <!-- /.row -->
+        <div class="col-xs-10 col-md-10 col-xs-offset-1 col-md-offset-1">
+            <h2 class="text-center"
+                th:text="'Kế Hoạch Học Phí Kỳ : ' + ${term.termName}"></h2>
+            <p style="font-weight: bold" class="text-center" th:text="'Thời Gian : ' + ${#dates.format(term.startDate, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(term.endDate, 'dd-MM-yyyy')}"></p>
+            <p style="font-weight: bold" class="text-center" th:text="'Hạn Chót : 06-12-2015'"></p>
+            <label th:text="'Tên Sinh Viên : ' + ${student.fullName}">Tran Khac
+                Vy</label><br/>
+            <label th:if="${student.financialType.financialTypeName eq 'BT'}">Tình
+                Trạng : BT</label>
+            <label th:if="${student.financialType.financialTypeName != 'BT'}"
+                   th:text="'Tình Trạng : ' +  ${student.financialType.financialTypeName} + ${student.financialType.financialRate}"></label>
+
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nội Dung Đóng Tiền</th>
+                    <th>Số Tiền</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${session.plan == null}">
+                    <td colspan="3">Không Có Thông Tin</td>
+                </tr>
+
+                <tr th:each="item, i : ${session.plan}">
+                    <td th:text="${i.count}">John</td>
+                    <td th:text="${item.tuitionName}">Doe</td>
+                    <td th:text="${item.tuition}">john@example.com</td>
+                </tr>
+                <!--   <tr>
+                       <td>Mary</td>
+                       <td>Moe</td>
+                       <td>mary@example.com</td>
+                   </tr>
+                   <tr>
+                       <td>July</td>
+                       <td>Dooley</td>
+                       <td>july@example.com</td>
+                   </tr>-->
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </section>
+    <!-- /.content -->
+</div>

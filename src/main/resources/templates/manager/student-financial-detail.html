@@ -1,0 +1,239 @@
+<div class="content-wrapper bg-white" style="min-height: 916px;">
+
+    <!-- Main content -->
+    <section class="content">
+        <!--<div class="box">-->
+        <ul class="nav nav-pills nav-justified bg-aqua">
+            <!--Input By Form -->
+            <li class="active"><a data-toggle="pill" href="#inputForm">Lịch Sử Đóng Học Phí</a></li>
+            <!--Import Excel -->
+            <li><a data-toggle="pill" href="#importExcel">Thông Tin Sinh Viên</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="inputForm" class="tab-pane fade in active">
+                <div class="panel-group">
+
+                    <h2 class="text-center">Danh Sách Đóng Tiền Học Phí</h2>
+
+                    <div class="box box-borderless">
+                        <table class="table table-hover table-bordered table-text-center">
+                            <tbody>
+                            <tr>
+                                <th style="width: 10px">STT</th>
+                                <th>Nội Dung Đóng Tiền</th>
+                                <th>Số Tiền Cần Đóng (VNĐ)</th>
+                                <th>Tình Trạng</th>
+                                <th>Ngày Chuyển Khoản</th>
+                                <th>Xem Chi Tiết</th>
+                            </tr>
+                            <tr th:if="${listPayment.size() == 0}">
+                                <td colspan="6" class="text-center"><b>ĐANG CẬP NHẬT</b>
+                                </td>
+                            </tr>
+
+                            <th:block th:each="item, i : ${listPayment}">
+                                <tr data-toggle="collapse"
+                                    th:attr="data-target='#row'+${i.count}"  class="accordion-toggle">
+                                    <td th:text="${i.count}">1.</td>
+                                    <td th:text="${item.tuition.tuitionName}">
+                                        CHuyên Ngành 1
+                                    </td>
+
+                                    <td th:text="${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(item.totalTuition)}">24,000,000 VNĐ</td>
+                                    <!-- <td th:text="${item.totalTuition}">12,000,000
+                                         VNĐ
+                                     </td>-->
+                                    <td th:if="${item.status}">Đã Nộp</td>
+                                    <td th:if="${!item.status}">Thiếu</td>
+                                    <td th:if="${item.transferDate != null}"
+                                        th:text="${#dates.format(item.transferDate, 'dd-MM-yyyy')}">
+                                        09/07/2015
+                                    </td>
+                                    <td th:if="${item.transferDate == null}"
+                                        th:text="'-'"></td>
+                                    <td>
+                                        <button class="btn btn-default btn-xs"><span
+                                                class="glyphicon glyphicon-eye-open"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" class="collapse-row">
+                                        <div class="my-row accordian-body collapse"
+                                             th:id="'row' + ${i.count}">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <table class="table borderless collapse-table"
+                                                       th:with="sem=${item.semester}">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td width="30%"><label>Họ Và
+                                                            Tên</label></td>
+                                                        <td th:text="${item.student.fullName}">Trần Khắc Vỹ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>MSSV</label></td>
+                                                        <td th:text="${item.student.studentCode}">SE60964</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>CMND</label></td>
+                                                        <td th:text="${item.student.ssn}">241999000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Nội Dung Đóng
+                                                            Tiền</label></td>
+                                                        <td th:text="${item.tuition.tuitionName}">Chuyên Ngành 1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Học Kỳ</label>
+                                                        </td>
+                                                        <td th:text="${sem.season.seasonName} + ' ( ' + ${#dates.format(sem.season.startDate, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(sem.season.endDate, 'dd-MM-yyyy')} + ' ) '">Fall 2015 (03/05/2015 -
+                                                            03/08/2015)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Mức Học
+                                                            Phí</label></td>
+                                                        <td th:text="${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(item.totalTuition)} + ' VNĐ'">24,000,000 VNĐ</td>
+                                                    </tr>
+                                                    <tr th:with="subtract=${item.subtractTuition}">
+                                                        <td><label>Các Khoản Trừ</label></td>
+                                                        <td>
+                                                            <p th:each="row : ${subtract}" th:text="${row.subtractTuitionName} + ' : ' + ${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(row.subtractTuition)} + ' VNĐ'"></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Học Phí Cần Nộp</label></td>
+                                                        <td th:text="${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(item.actualTuition)} + ' VNĐ'">12,000,000 VNĐ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Học Phí Đã Nộp</label></td>
+                                                        <td th:text="${T(com.project.fpt.sfm.common.NumberUtils).formatCurrency(item.paidTuition)} + ' VNĐ'">12,000,000 VNĐ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Trạng Thái</label></td>
+                                                        <td th:text="${item.status} ? 'Đã Nộp' : 'Nộp Thiếu'">Nộp Đủ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Thiếu/Dư</label></td>
+                                                        <td>0 VNĐ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td ><label>Ngày Chuyển
+                                                            Khoản</label></td>
+                                                        <td th:if="${item.transferDate != null}"
+                                                            th:text="${#dates.format(item.transferDate, 'dd-MM-yyyy')}">
+                                                            09/07/2015
+                                                        </td>
+                                                        <td th:if="${item.transferDate == null}" th:text="'-'"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Ngân Hàng</label>
+                                                        </td>
+                                                        <td th:text="${item.bank}">Đông Á</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+            <!--Excel File-->
+            <div id="importExcel" class="tab-pane fade">
+
+                <div class="row">
+                    <h3 class="text-center">Thông Tin Cá
+                        Nhân</h3>
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <table class="table borderless" th:if="${student != null}">
+                            <tbody>
+                            <tr>
+                                <td width="30%"><label>Họ Và Tên</label></td>
+                                <td th:text="${student.fullName}">Trần Khắc Vỹ</td>
+                            </tr>
+                            <tr>
+                                <td><label>Giới Tính</label></td>
+                                <td th:if="${student.gender}">Nam</td>
+                                <td th:if="${!student.gender}">Nữ</td>
+                            </tr>
+                            <tr>
+                                <td><label>MSSV</label></td>
+                                <td th:text="${student.studentCode}">SE60964</td>
+                            </tr>
+                            <tr>
+                                <td><label>Email</label></td>
+                                <td th:text="${student.email}">VyTKSE60964@fpt.edu.vn</td>
+                            </tr>
+                            <tr>
+                                <td><label>Ngày Sinh</label></td>
+                                <!--<td th:text="${student.dateOfBirth}">07/06/2015</td>-->
+                                <td th:text="${#dates.format(student.dateOfBirth, 'dd-MM-yyyy')}">07/06/2015</td>
+                            </tr>
+                            <tr>
+                                <td><label>Số Điện Thoại</label></td>
+                                <td th:text="${student.phoneNumber}">01672011550</td>
+                            </tr>
+                            <tr>
+                                <td><label>Địa Chỉ</label></td>
+                                <td th:text="${student.address}">123 Lê Lọi</td>
+                            </tr>
+                            <tr>
+                                <td><label>Email Phụ Huynh</label></td>
+                                <td th:text="${student.parentEmail}">phuhuynh@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <td><label>Số Điện Thoại Phụ Huynh</label></td>
+                                <td th:text="${student.parentPhone}">0123456789</td>
+                            </tr>
+                            <tr>
+                                <td><label>Tình Trạng</label></td>
+                                <td th:text="${student.financialType}">Vay Tín Dụng 50%</td>
+                            </tr>
+                            <tr>
+                                <td><label>Khóa Nhập Học</label></td>
+                                <td th:text="${student.academicYear}">Khóa 7</td>
+                            </tr>
+                            <tr>
+                                <td><label>Học Kỳ Nhập Học</label></td>
+                                <td>Fall 2011 (06/07/2011 - 07/11/2011)</td>
+                            </tr>
+                            <tr>
+                                <td><label>Tiếng Anh Đầu Vào</label></td>
+                                <td>ENG4</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+        <!-- /.col -->
+        <!--</div>-->
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>

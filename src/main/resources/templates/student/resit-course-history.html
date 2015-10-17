@@ -1,0 +1,81 @@
+<div class="content-wrapper bg-white" style="min-height: 916px;">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="text-center">Những Môn Chưa Hoàn Thành</h2>
+
+                <div class="my-box">
+                    <!--Search form-->
+                   <!-- <div class="col-md-6 col-xs-6">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false">Action <span
+                                        class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            &lt;!&ndash; /btn-group &ndash;&gt;
+                            <input type="text" class="form-control"
+                                   aria-label="..."/>
+                           <span class="input-group-btn">
+                               <button class="btn btn-primary">Search</button>
+                           </span>
+                        </div>
+                        &lt;!&ndash; /input-group &ndash;&gt;
+                    </div>-->
+                    <!--/Search form-->
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!--End row-->
+
+                <div class="my-box">
+                    <div class="col-md-12 col-xs-12">
+                        <table style="margin-top: 20px"
+                               class="table table-hover table-bordered table-responsive table-text-center">
+                            <tbody>
+                            <tr>
+                                <th style="width: 10px">STT</th>
+                                <th>Mã Môn</th>
+                                <th>Tên Môn</th>
+                                <th>Số Tín Chỉ</th>
+                                <th>Học Kỳ</th>
+                                <th>Ghi Chú</th>
+                                <th>Thêm</th>
+                            </tr>
+                            <tr th:if="${retakeSubjectPayments.size() == 0}">
+                                <td colspan="7" class="text-center"><b>ĐANG CẬP NHẬT</b>
+                                </td>
+                            </tr>
+                            <tr th:each="item,i : ${retakeSubjectPayments}" th:with="sub=${item.subjectInSemester.subject}">
+                                <td th:text="${i.count}">1.</td>
+                                <td th:text="${sub.subjectCode}">
+                                    PRJ
+                                </td>
+                                <td th:text="${sub.subjectNameE}">Advance Java</td>
+                                <td th:text="${item.subjectInSemester.numberOfCredit}">3</td>
+                                <td th:text="${item.subjectInSemester.semester.term.termName}">Fall 2015</td>
+                                <td>Nợ Môn</td>
+                                <td>-</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>

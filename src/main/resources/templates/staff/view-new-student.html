@@ -1,0 +1,68 @@
+<!--Main Content-->
+<div class="content-wrapper bg-white" style="min-height: 916px;">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="text-center">DANH SÁCH SINH VIÊN</h2>
+
+
+
+                <div class="box box-borderless">
+                    <table class="table table-hover table-bordered table-responsive table-text-center">
+                        <tbody>
+                        <tr>
+                            <th style="width: 10px">STT</th>
+                            <th>MSSV</th>
+                            <th>Họ Và Tên</th>
+                            <th>Loại Tài Chính</th>
+                            <th>Chuyên Ngành</th>
+                            <th>Tiếng Anh Đầu Vào</th>
+                        </tr>
+
+                        <tr th:if="${listStudent.size() == 0}">
+                            <td colspan="6">ĐANG CẬP NHẬT</td>
+                        </tr>
+
+                        <tr th:each="item, i : ${listStudent}">
+                            <td th:text="${i.count}">1.</td>
+                            <td th:text="${item.studentCode}">SE60964</td>
+                            <td th:text="${item.fullName}">Trần Khắc Vỹ</td>
+                            <td th:text="${item.financialType.financialTypeName}">Đã Nộp</td>
+                            <td th:text="${item.major.majorCode}">09/07/2015</td>
+                            <td th:text="${item.currentStudyStage}"></td>
+                        </tr>
+
+                       <!-- <tr>
+                            <td>1.</td>
+                            <td>SE60964</td>
+                            <td>Trần Khắc Vỹ</td>
+                            <td>Đã Nộp</td>
+                            <td>09/07/2015</td>
+                            <td><a href="#">Chi Tiết</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>1.</td>
+                            <td>SE60964</td>
+                            <td>Trần Khắc Vỹ</td>
+                            <td>Chưa Nộpa</td>
+                            <td>09/07/2015</td>
+                            <td><a href="#">Chi Tiết</a></td>
+                        </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>

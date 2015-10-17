@@ -1,0 +1,60 @@
+<!-- sidebar menu: : style can be found in sidebar.less -->
+<ul class="sidebar-menu" xmlns:th="http://www.thymeleaf.org/">
+    <li class="header">MAIN NAVIGATION</li>
+
+    <th:block  sec:authorize="hasRole('STAFF_STUDENT_SERVICE')">
+        <li class="treeview">
+            <a href="/nhan-vien/cong-tac-sinh-vien/nhap-thong-tin-sinh-vien">
+                <i class="fa fa-laptop"></i>
+                <span>Nhập Thông Tin Sinh viên</span>
+            </a>
+        </li>
+
+        <li class="treeview">
+            <a href="/nhan-vien/cong-tac-sinh-vien/thong-tin-sinh-vien-moi">
+                <i class="fa fa-laptop"></i>
+                <span>Quản Lý Thông Tin Sinh Viên</span>
+            </a>
+        </li>
+    </th:block>
+
+    <th:block sec:authorize="hasRole('STAFF_FINANCIAL')">
+        <li class="treeview">
+            <a href="/nhan-vien/tai-chinh/nhap-danh-sach-dong-hoc-phi">
+                <i class="fa fa-laptop"></i>
+                <span>Danh Sách Nộp Học Phí</span>
+            </a>
+        </li>
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>Danh Sách Nộp Học Lại</span>
+            </a>
+        </li>
+    </th:block>
+
+
+    <th:block  sec:authorize="hasRole('STAFF_REGISTRAR')">
+        <li class="treeview">
+            <a href="/nhan-vien/dao-tao/ket-qua-hoc-tap">
+                <i class="fa fa-laptop"></i>
+                <span>Nhập Kết Quả Học Tập</span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a th:href="@{/nhan-vien/dao-tao/quan-ly-hoc-ky}">
+                <i class="fa fa-laptop"></i>
+                <span>Quản Lý Học Kỳ</span>
+            </a>
+        </li>
+    </th:block>
+
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Thông Tin Cá Nhân</span>
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,60 @@
+<span xmlns:th="http://www.thymeleaf.org/">
+    <h3 class="text-center">Thông Tin Cá Nhân</h3>
+    <table class="table borderless" th:if="${student != null}">
+        <tbody>
+            <tr>
+                <td width="30%"><label>Họ Và Tên</label></td>
+                <td th:text="${student.fullName}">Trần Khắc Vỹ</td>
+            </tr>
+            <tr>
+                <td><label>Giới Tính</label></td>
+                <td th:if="${student.gender}">Nam</td>
+                <td th:if="${!student.gender}">Nữ</td>
+            </tr>
+            <tr>
+                <td><label>MSSV</label></td>
+                <td th:text="${student.studentCode}">SE60964</td>
+            </tr>
+            <tr>
+                <td><label>Email</label></td>
+                <td th:text="${student.email}">VyTKSE60964@fpt.edu.vn</td>
+            </tr>
+            <tr>
+                <td><label>Ngày Sinh</label></td>
+                <td th:text="${#dates.format(student.dateOfBirth, 'dd-MM-yyyy')}">07/06/2015</td>
+            </tr>
+            <tr>
+                <td><label>Số Điện Thoại</label></td>
+                <td th:text="${student.phoneNumber}">01672011550</td>
+            </tr>
+            <tr>
+                <td><label>Địa Chỉ</label></td>
+                <td th:text="${student.address}">123 Lê Lọi</td>
+            </tr>
+            <tr>
+                <td><label>Email Phụ Huynh</label></td>
+                <td th:text="${student.parentEmail}">phuhuynh@gmail.com</td>
+            </tr>
+            <tr>
+                <td><label>Số Điện Thoại Phụ Huynh</label></td>
+                <td th:text="${student.parentPhone}">0123456789</td>
+            </tr>
+            <tr>
+                <td><label>Tình Trạng</label></td>
+                <td th:text="${student.financialType}">Vay Tín Dụng 50%</td>
+            </tr>
+            <tr>
+                <td><label>Khóa Nhập Học</label></td>
+                <td th:text="${student.academicYear}">Khóa 7</td>
+            </tr>
+            <tr>
+                <td><label>Học Kỳ Nhập Học</label></td>
+                <td>Fall 2011 (06/07/2011 - 07/11/2011)</td>
+            </tr>
+            <tr>
+                <td><label>Tiếng Anh Đầu Vào</label></td>
+                <td>ENG4</td>
+            </tr>
+        </tbody>
+    </table>
+</span>

@@ -1,0 +1,50 @@
+<!-- sidebar menu: : style can be found in sidebar.less -->
+<ul class="sidebar-menu" xmlns:th="http://www.thymeleaf.org/">
+    <li class="header">MAIN NAVIGATION</li>
+    <!--THONG TIN HOC TAP -->
+    <li th:with="check=${content == 'student/study-history' or content == 'student/resit-course-history'}" th:class="${check} ? 'active treeview' : 'treeview'">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Thông Tin Học Tập</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu" th:style="${!check} ? 'display: none' : ''">
+            <li th:class="${content == 'student/study-history'} ? 'active' : ''"><a href="/sinh-vien/cac-ky-da-hoc"><i class="fa fa-circle-o"></i>Những Kỳ Đã Học</a></li>
+            <li th:class="${content == 'student/resit-course-history'} ? 'active' : ''"><a href="#"><i class="fa fa-circle-o"></i>Các Môn Đang Nợ</a></li>
+        </ul>
+    </li>
+    <!--THONG TIN TAI CHINH-->
+    <li th:with="check=${content == 'student/tuition-overview' or content == 'student/tuition-history' or content == 'student/resit-course-financial-history'}" th:class="${check} ? 'active treeview' : 'treeview'">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Thông Tin Tài Chính</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu" th:style="${!check} ? 'display: none' : ''">
+            <li th:class="${content == 'student/tuition-overview'} ? 'active' : ''"><a href="/sinh-vien/hoc-phi-du-kien"><i class="fa fa-circle-o"></i>Học Phí Dự Kiến</a></li>
+            <li th:class="${content == 'student/tuition-history'} ? 'active' : ''"><a href="/sinh-vien/hoc-phi-cac-ky"><i class="fa fa-circle-o"></i>Trạng Thái Đóng Học Phí</a></li>
+            <li th:class="${content == 'student/resit-course-financial-history'} ? 'active' : ''"><a href="#"><i class="fa fa-circle-o"></i>Trạng Thái Đóng Tiền Học Lại</a></li>
+        </ul>
+    </li>
+
+
+    <li class="treeview" th:if="${#authorization.expression('hasRole(''LOANSCREDIT_STUDENT'')')}">
+        <a href="/student/xemlaivay">
+            <i class="fa fa-laptop"></i>
+            <span>Xem Lãi Vay</span>
+        </a>
+    </li>
+
+    <li th:with="check=${content == 'student/profile'}" th:class="${check} ? 'active treeview' : 'treeview'">
+        <a href="/sinh-vien/thong-tin-ca-nhan">
+            <i class="fa fa-laptop"></i>
+            <span>Thông Tin Cá Nhân</span>
+        </a>
+    </li>
+
+
+    <li th:if="${session.plan != null}">
+        <a href="/sinh-vien/ke-hoach-nop-hoc-phi">
+            <i class="fa fa-laptop"></i>
+            <span>Kế Hoạch Nộp Học Phí</span>
+        </a>
+    </li>
+
+
+</ul>
