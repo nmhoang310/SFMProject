@@ -1,14 +1,9 @@
 package com.project.fpt.sfm.web.controller.student;
 
-import com.project.fpt.sfm.entities.Course;
-import com.project.fpt.sfm.entities.RetakeSubjectPayment;
-import com.project.fpt.sfm.entities.Semester;
-import com.project.fpt.sfm.entities.Student;
 import com.project.fpt.sfm.entities.*;
 import com.project.fpt.sfm.repository.TermRepo;
 import com.project.fpt.sfm.repository.TuitionPaymentRepo;
 import com.project.fpt.sfm.repository.TuitionPlanRepo;
-import com.project.fpt.sfm.service.StudentService;
 import com.project.fpt.sfm.service.TrungStudentService;
 import com.project.fpt.sfm.service.TuitionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +21,12 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/sinh-vien")
-public class StudentController {
+public class StudentController extends AbstractStudentController {
 
     @Autowired
     TrungStudentService trungStudentService;
     @Autowired
     TuitionService tuitionService;
-    @Autowired
-    StudentService studentService;
     @Autowired
     TermRepo termRepo;
     @Autowired
@@ -75,36 +68,6 @@ public class StudentController {
         model.addAttribute("term", curTerm);
         model.addAttribute("student", student);
 
-
-        return "home";
-    }
-
-/*
-    @RequestMapping("/thong-tin-ca-nhan")
-    public String viewProfile(Model model) {
-        model.addAttribute("sidebar", "student/student-sidebar");
-        model.addAttribute("content", "student/profile");
-
-        */
-
-    /**
-     * Get current user login
-     *//*
-        Student student = trungStudentService.viewProfile();
-        model.addAttribute("student", student);
-
-        return "home";
-    }*/
-    @RequestMapping("/thong-tin-ca-nhan")
-    public String viewProfile(Model model) {
-        model.addAttribute("sidebar", "student/student-sidebar");
-        model.addAttribute("content", "student/profile");
-
-        /**
-         * Get current user login
-         */
-        Student student = trungStudentService.viewProfile();
-        model.addAttribute("student", student);
 
         return "home";
     }

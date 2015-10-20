@@ -7,6 +7,7 @@ import com.project.fpt.sfm.entities.Term;
 import com.project.fpt.sfm.processexcel.development.model.StudentModel;
 import com.project.fpt.sfm.processexcel.model.StudentTemplate;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 /**
@@ -30,9 +31,11 @@ public interface StudentService {
 
     void retakeCourseTuitionPlan(Student student, Term term);
 
-
     List<RetakeSubjectPayment> getListResitCourse(int studentId);
 
     List<Student> getListNewStudent();
 
+    int updateBasicInfo(Student student);
+
+    Student findByUsername(String username) throws EntityNotFoundException;
 }
