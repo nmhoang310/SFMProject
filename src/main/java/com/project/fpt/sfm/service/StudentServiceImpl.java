@@ -11,6 +11,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -343,4 +344,18 @@ public class StudentServiceImpl implements StudentService {
         return studentRepo.findByStatus(Constant.STUDENT_STATUS_WAITING);
     }
 
+    @Override
+    public int updateBasicInfo(Student student) {
+        return studentRepo.updateBasicInfo(student.getStudentId(), student.getPhoneNumber(), student.getParentPhone(), student.getParentEmail(), student.getAddress());
+    }
+
+    @Override
+    public Student findByUsername(String username) throws EntityNotFoundException {
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new EntityNotFoundException();
+        }
+        Student student = studentRepo.findOne(user.getUserId());
+        return student;
+    }
 }
