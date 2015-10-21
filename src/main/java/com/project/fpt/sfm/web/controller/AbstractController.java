@@ -17,6 +17,10 @@ public abstract class AbstractController {
         return (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    /**
+     * Get internal login user.
+     * @return
+     */
     public User getInternalLoginUser() {
         return userService.findByUsername(getLoginUser().getUsername());
     }
